@@ -5,7 +5,7 @@ import re
 # This class parses a page for reviews and returns a list of reviews for analysis
 class PageScraper:
 
-    # Get url and store in state for later use
+    # The constructor stores the given url in state and the headers needed to successfully scrape each page
     def __init__(self, url):
         self.url = url
         self.reviews = []
@@ -23,13 +23,14 @@ class PageScraper:
             'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
         }
     
+    # This is the main() method for the class.
     def get_reviews(self):
         link_to_reviews = self.open_product_link()
         raw_review_data = self.open_reviews_link(link_to_reviews)
         self.clean_raw_review_data(raw_review_data)
         print('Successfully fetched and cleaned {} reviews.'.format(len(self.reviews)))
 
-    # This method opens the provided product link and extracts the reviews link
+    # This method opens the provided product link and extracts the 'see all reviews' link
     def open_product_link(self):
         print('Going to product page...')
         review_link_reg = r'"see-all-reviews-link-foot.*a>'
@@ -39,7 +40,8 @@ class PageScraper:
         review_link_final = re.search(href_reg, review_link_raw).group()[6:-1]
         return review_link_final
 
-    # This method opens the review
+    # This method opens the initial 'see all reviews' link and then opens the next 10 review pages.
+    # It returns a list of raw reviews that need cleaning
     def open_reviews_link(self, review_url):
         raw_review_data = []
         review_body_reg = r'<span data-hook="review-body" class="a-size-base review-text review-text-content">.*?/span>'
@@ -56,10 +58,12 @@ class PageScraper:
             raw_page_string = str(page.content)
         return raw_review_data
 
+    # This method extracts the link to the 'Next page' of reviews
     def get_next_review_page(self, raw_page):
         next_review_page_reg = r'<li class="a-last".*?Next page'
         return re.search(next_review_page_reg, raw_page).group()[28:-11]
 
+    # This method cleans the raw review data and stores all the cleaned reviews in self.reviews in state
     def clean_raw_review_data(self, raw_review_data):
         reg = r'<span data-hook="review-body" class="a-size-base review-text review-text-content">|<span>|\\n|<br />|<br>|</span>|xe2|x80|x99dF|\\|&#34'
         for review in raw_review_data:
