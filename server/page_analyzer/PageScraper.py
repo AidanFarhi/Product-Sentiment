@@ -54,6 +54,8 @@ class PageScraper:
             for rev in raw_reviews:
                 raw_review_data.append(rev)
             next_page_url = self.get_next_review_page(raw_page_string)
+            if next_page_url is None:  # In case there are no more pages
+                break
             page = requests.get('https://amazon.com' + next_page_url, headers=self.headers)
             raw_page_string = str(page.content)
         return raw_review_data
