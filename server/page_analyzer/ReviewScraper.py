@@ -102,17 +102,18 @@ class ReviewScraper:
         print('Extracting reviews...')
         # Sends out all requests to scrape reviews async, which drastically reduces execution time
         asyncio.get_event_loop().run_until_complete(self.send_out_async_requests(next_page_links))
+        return self.reviews
 
 # Test Area
-def main():
-    # Normally this takes the url as an argument, but for test purposes it is currently hardcoded in state
-    review_scraper = ReviewScraper()
-    start = time.time()
-    review_scraper.get_reviews()
-    print(f'Reviews extracted: {len(review_scraper.reviews)}')
-    print(f'Time taken: {time.time() - start} seconds')
-    print('Last 3 reviews:')
-    print(review_scraper.reviews[147:])
+# def main():
+#     # Normally this takes the url as an argument, but for test purposes it is currently hardcoded in state
+#     review_scraper = ReviewScraper()
+#     start = time.time()
+#     review_scraper.get_reviews()
+#     print(f'Reviews extracted: {len(review_scraper.reviews)}')
+#     print(f'Time taken: {time.time() - start} seconds')
+#     print('Last 3 reviews:')
+#     print(review_scraper.reviews[147:])
 
 
-main()
+# main()
