@@ -1,6 +1,5 @@
 from ReviewScraper import ReviewScraper
 
-
 class Analyzer:
     
     # reviews will be an array of review strings to be analyzed
