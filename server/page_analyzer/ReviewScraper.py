@@ -7,20 +7,21 @@ import time
 class ReviewScraper:
 
     # Store given url, headers, cleaned reviews, and a count of pages scraped in state
-    def __init__(self, url=None):
-        self.url = 'https://www.amazon.com/Headphones-Microphone-Lightweight-Comfortable-Foldable/dp/B07J5X68B2/ref=sr_1_1_sspa?crid=1LU42U7ZS8LUD&dchild=1&keywords=headphones&qid=1611168382&sprefix=headpho%2Caps%2C201&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExUDBIUzdZRURKUEdBJmVuY3J5cHRlZElkPUEwNDgwODk0TjlOM0lFMEZHVUE2JmVuY3J5cHRlZEFkSWQ9QTAyNDEzMzgyRlYwNDIzMk5aVTNMJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ=='
+    def __init__(self, url):
+        self.url = url
         self.headers = {
             'authority': 'www.amazon.com',
             'pragma': 'no-cache',
             'cache-control': 'no-cache',
             'dnt': '1',
             'upgrade-insecure-requests': '1',
-            'User-Agent': 'Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            'accept-encoding': 'gzip, deflate, br',
             'sec-fetch-site': 'none',
             'sec-fetch-mode': 'navigate',
             'sec-fetch-dest': 'document',
-            'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+            'accept-language': 'en-US,en;q=0.9',
         }
         self.reviews = []
         self.pages = 0
