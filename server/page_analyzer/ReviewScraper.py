@@ -8,6 +8,7 @@ class ReviewScraper:
 
     # Store given url, headers, cleaned reviews, and a count of pages scraped in state
     def __init__(self, url):
+        print(url)
         self.url = url
         self.headers = {
             'authority': 'www.amazon.com',
@@ -25,6 +26,8 @@ class ReviewScraper:
         }
         self.reviews = []
         self.pages = 0
+        self.time = 0
+        self.reviews_scraped = 0
 
     # Extracts and returns product "see all reviews" link
     def open_product_link(self, url):
@@ -60,11 +63,12 @@ class ReviewScraper:
 
     # This generates links to the next 15 pages of reviews to be visited, and returns an array of links
     def get_next_pages(self, original_next_page_link):
-        start_index = str.find(original_next_page_link, 'Number=')
-        replace_index = start_index + 7
+        print(original_next_page_link)
+        replace_index = str.find(original_next_page_link, 'amp;')
         ten_page_links = []
         for i in range (2, 16):
-            new_link = original_next_page_link[:replace_index] + str(i) + original_next_page_link[replace_index + 1:]
+            page_num = f'pageNumber={i}'
+            new_link = original_next_page_link[:replace_index] + page_num
             ten_page_links.append('https://amazon.com' + new_link)
         return ten_page_links
 
@@ -101,10 +105,14 @@ class ReviewScraper:
         original_next_review_page_link = self.get_original_next_review_page(raw_all_reviews_page)
         print('Generating links...')
         next_page_links = self.get_next_pages(original_next_review_page_link)
+        print(next_page_links)
         print('Extracting reviews...')
         # Sends out all requests to scrape reviews async, which drastically reduces execution time
-        asyncio.get_event_loop().run_until_complete(self.send_out_async_requests(next_page_links))
-        start = time.time()
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(self.send_out_async_requests(next_page_links))
+        self.time = time.time() - start
+        self.reviews_scraped = len(self.reviews)
         print(f'Reviews extracted: {len(self.reviews)}')
-        print(f'Time taken: {time.time() - start} seconds')
+        print(f'Time taken: {self.time} seconds')
         return self.reviews

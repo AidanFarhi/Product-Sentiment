@@ -10,7 +10,14 @@ export default function App() {
         ev.preventDefault()
         try {
             // This is where we will send the url to the server and wait for analysis
-            console.log(url)
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({url: url})
+            }
+            const res = await fetch('/analyze', requestOptions)
+            const data = await res.json()
+            console.log(data)
         } catch(er) { console.log(er) }
     }
 
