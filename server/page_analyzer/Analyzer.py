@@ -1,4 +1,4 @@
-from ReviewScraper import ReviewScraper
+#from ReviewScraper import ReviewScraper
 import re
 
 test_urls = [
@@ -145,14 +145,15 @@ class Analyzer:
     def analyze_reviews(self):
         self.get_counts(self.reviews)
         self.show_results()
+        return True
 
 
-def main():
-    review_scraper = ReviewScraper(test_urls[3])
-    reviews = review_scraper.get_reviews()
-    print(len(reviews))
-    p_analyzer = Analyzer(reviews)
-    p_analyzer.analyze_reviews()
+# def main():
+#     review_scraper = ReviewScraper(test_urls[3])
+#     reviews = review_scraper.get_reviews()
+#     print(len(reviews))
+#     p_analyzer = Analyzer(reviews)
+#     p_analyzer.analyze_reviews()
 
 
-main()
+# main()
