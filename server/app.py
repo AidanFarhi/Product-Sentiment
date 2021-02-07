@@ -16,7 +16,8 @@ def analyze():
             "positive_hits": analyzer.total_positive_hits,
             "negative_hits": analyzer.total_negative_hits,
             "reviews_scraped": review_scraper.reviews_scraped,
-            "time_taken": review_scraper.time
+            "time_taken": review_scraper.time,
+            "score": analyzer.score
         }
     return {"res": "default"}
 
