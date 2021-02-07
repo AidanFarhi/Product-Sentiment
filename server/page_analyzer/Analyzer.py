@@ -98,6 +98,7 @@ class Analyzer:
             'not happy': 0,
             'not a good choice': 0,
             'returning': 0,
+            'will return': 0,
             'annoying': 0,
             'not high quality': 0,
             'not sturdy': 0,
@@ -121,6 +122,7 @@ class Analyzer:
             'inedible': 0,
         }
         self.total_negative_hits = 0
+        self.score = 0
 
     def get_counts(self, reviews):
         for review in reviews:
@@ -142,8 +144,14 @@ class Analyzer:
         print("Positive Hits:", self.total_positive_hits)
         print("Negative Hits:", self.total_negative_hits)
 
+    def calc_score(self):
+        total_hits = self.total_positive_hits + self.total_negative_hits
+        score = (self.total_positive_hits / total_hits) * 100
+        self.score = score
+
     def analyze_reviews(self):
         self.get_counts(self.reviews)
+        self.calc_score()
         self.show_results()
         return True
 
