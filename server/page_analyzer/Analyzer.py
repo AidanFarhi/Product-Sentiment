@@ -147,7 +147,7 @@ class Analyzer:
     def calc_score(self):
         total_hits = self.total_positive_hits + self.total_negative_hits
         score = (self.total_positive_hits / total_hits) * 100
-        self.score = score
+        self.score = round(score, 2)
 
     def analyze_reviews(self):
         self.get_counts(self.reviews)

@@ -63,7 +63,6 @@ class ReviewScraper:
 
     # This generates links to the next 15 pages of reviews to be visited, and returns an array of links
     def get_next_pages(self, original_next_page_link):
-        print(original_next_page_link)
         replace_index = str.find(original_next_page_link, 'amp;')
         ten_page_links = []
         for i in range (2, 16):
@@ -105,13 +104,12 @@ class ReviewScraper:
         original_next_review_page_link = self.get_original_next_review_page(raw_all_reviews_page)
         print('Generating links...')
         next_page_links = self.get_next_pages(original_next_review_page_link)
-        print(next_page_links)
         print('Extracting reviews...')
         # Sends out all requests to scrape reviews async, which drastically reduces execution time
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self.send_out_async_requests(next_page_links))
-        self.time = time.time() - start
+        self.time = round(time.time() - start, 2)
         self.reviews_scraped = len(self.reviews)
         print(f'Reviews extracted: {len(self.reviews)}')
         print(f'Time taken: {self.time} seconds')

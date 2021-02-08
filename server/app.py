@@ -17,10 +17,6 @@ def analyze():
             "negative_hits": analyzer.total_negative_hits,
             "reviews_scraped": review_scraper.reviews_scraped,
             "time_taken": review_scraper.time,
-            "score": analyzer.score
+            "score": analyzer.score,
         }
     return {"res": "default"}
-
-@app.route('/hello')
-def hello():
-    return {'res': 'hello'}
