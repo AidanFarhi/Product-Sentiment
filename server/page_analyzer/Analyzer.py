@@ -1,12 +1,4 @@
-#from ReviewScraper import ReviewScraper
 import re
-
-test_urls = [
-    'https://www.amazon.com/ExcelSteel-Stainless-Steel-Colanders-Set/dp/B00FEDLBII/ref=cm_cr_arp_d_product_top?ie=UTF8&th=1',
-    'https://www.amazon.com/Headphones-Microphone-Lightweight-Comfortable-Foldable/dp/B07J5X68B2/ref=sr_1_1_sspa?crid=1LU42U7ZS8LUD&dchild=1&keywords=headphones&qid=1611168382&sprefix=headpho%2Caps%2C201&sr=8-1-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUExUDBIUzdZRURKUEdBJmVuY3J5cHRlZElkPUEwNDgwODk0TjlOM0lFMEZHVUE2JmVuY3J5cHRlZEFkSWQ9QTAyNDEzMzgyRlYwNDIzMk5aVTNMJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==',
-    'https://www.amazon.com/produce-aisle-Cantaloupe-One-Medium/dp/B000NSGULC?ref=US_TRF_DSK_UFG_RTL_ONSIT_0425559&fpw=fresh&pf_rd_r=DM5MK0RMDAHW6WNC5ZE7&pf_rd_p=a2fbb221-3d31-4621-bc2b-527067383c0e&pd_rd_r=a5320fa6-3922-4bd0-b37e-a246075cb449&pd_rd_w=Ur09B&pd_rd_wg=SedKi&ref_=pd_gw_unk',
-    'https://www.amazon.com/dp/B00LXWGWNI/ref=s9_acsd_al_bw_c2_x_3_t?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-14&pf_rd_r=PQ9FBQYMCK1WWFAYRHAX&pf_rd_t=101&pf_rd_p=50ea4b60-758f-466c-a69c-7c069294dd24&pf_rd_i=165793011'
-]
 
 class Analyzer:
     
@@ -154,14 +146,3 @@ class Analyzer:
         self.calc_score()
         self.show_results()
         return True
-
-
-# def main():
-#     review_scraper = ReviewScraper(test_urls[3])
-#     reviews = review_scraper.get_reviews()
-#     print(len(reviews))
-#     p_analyzer = Analyzer(reviews)
-#     p_analyzer.analyze_reviews()
-
-
-# main()
