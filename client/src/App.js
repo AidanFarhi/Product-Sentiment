@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReactLoading from 'react-loading'
 import '../src/styles/App.css'
+import logo from '../src/styles/analyze.png'
 
 export default function App() {
 
@@ -55,8 +56,12 @@ export default function App() {
 
     return (
         <div id='main'> 
+            <div id='nav-bar'>
+                <img id='logo' alt='lol' src={logo}/>
+                <h3 id='nav-bar-header'>Amazon Product Analyzer</h3>
+            </div>
             <div id='url-form'>
-                <h3 id='header'>Enter a product URL to analyze</h3>
+                <h3 id='form-header'>Enter a product URL to analyze</h3>
                 <form id='form' onSubmit={handleSubmit}>
                     <input id='url-input' type="text" placeholder="Enter Url..." onChange={handleChange} />
                     <br></br>
