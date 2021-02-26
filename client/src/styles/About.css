@@ -1,0 +1,26 @@
+#about-main-div {
+    display: grid;
+    grid-template-rows: 8vh 80vh;
+    grid-template-columns: 5vw 90vw 5vw;
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: rgb(243, 243, 243);
+    grid-column: 2/3;
+    grid-row: 2/3;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+#info>h4 {
+    font-size: 1.8rem;
+    color: rgb(22, 22, 22);
+}
+
+#info>p, #info>ol>li {
+    color: rgb(46, 46, 46);
+    font-size: 1.2rem;
+}

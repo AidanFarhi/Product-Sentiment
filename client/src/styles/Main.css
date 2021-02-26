@@ -12,6 +12,14 @@ body, #main {
     outline: none;
 }
 
+#main-link {
+    text-decoration: none;
+}
+
+#main-link:visited {
+    color: rgb(20, 20, 20);
+}
+
 #nav-bar {
     font-size: 1.2rem;
     display: flex;
@@ -32,6 +40,21 @@ body, #main {
     background-color: rgb(202, 202, 202);
     width: 2.5rem;
     height: 2.5rem;
+}
+
+#about-link {
+    color:rgb(120, 120, 120);
+    position: fixed;
+    text-decoration: none;
+    right: 3rem;
+}
+
+#about-link:hover {
+    opacity: .8;
+}
+
+#about-link:visited {
+    color:rgb(120, 120, 120);
 }
 
 #form-header {
@@ -141,5 +164,4 @@ body, #main {
 
 .result-span {
     font-size: 2.5rem;
-
 }
