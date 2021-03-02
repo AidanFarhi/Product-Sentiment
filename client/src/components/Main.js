@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
 import ReactLoading from 'react-loading'
+import Error from '../components/Error'
 import '../styles/Main.css'
 
 export default function Main() {
 
     const [url, setUrl] = useState('')
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(false)
     const [results, setResults] = useState(
         {
             score: null,
             time: null,
             totalReviews: null,
-            color: null
+            color: null,
         }
     )
 
@@ -29,6 +31,7 @@ export default function Main() {
     const handleSubmit = async(ev) => {
         ev.preventDefault()
         try {
+            setError(false)
             setLoading(true)
             setResults({score: null, time: null, totalReviews: null, color: null})
             // This is where we will send the url to the server and wait for analysis
@@ -38,6 +41,11 @@ export default function Main() {
                 body: JSON.stringify({url: url})
             }
             const res = await fetch('/analyze', requestOptions)
+            if (!res.ok) {  // make sure response is ok
+                setError(true)
+                setLoading(false)
+                return
+            }
             const data = await res.json()
             const color = calculateColor(data.score)
             setLoading(false)
@@ -64,6 +72,7 @@ export default function Main() {
                 </form>
             </div>
             <div id='results-main-div'>
+                {error ? <Error /> : null}
                 {loading ? 
                     <div id='loading-div'>
                         <h2 id='loading-header'>Analyzing Product...</h2>
