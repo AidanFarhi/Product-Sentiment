@@ -21,6 +21,11 @@ class Analyzer:
             'work perfectly': 0,
             'work great': 0,
             'work well': 0,
+            'looks great': 0,
+            'looks good': 0,
+            'works perfectly': 0,
+            'works great': 0,
+            'works well': 0,
             'glad I made': 0,
             'good value': 0,
             'great value': 0,
@@ -60,6 +65,9 @@ class Analyzer:
             'good condition': 0,
             'was delicious': 0,
             'is delicious': 0,
+            'excellent book': 0,
+            'great read': 0,
+            'excellent read': 0,
         }
         self.total_positive_hits = 0
         # maintain a count of negagive words found in reviews
@@ -138,8 +146,11 @@ class Analyzer:
 
     def calc_score(self):
         total_hits = self.total_positive_hits + self.total_negative_hits
-        score = (self.total_positive_hits / total_hits) * 100
-        self.score = round(score, 2)
+        if total_hits == 0:  # set result to -1 if no results obtained
+            self.score = -1
+        else:
+            score = (self.total_positive_hits / total_hits) * 100
+            self.score = round(score, 2)
 
     def analyze_reviews(self):
         self.get_counts(self.reviews)

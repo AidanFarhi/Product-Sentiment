@@ -76,7 +76,9 @@ export default function Main() {
                 <div id='results'>
                     <div className='result' id='score-div'>
                         <h2>Total Score</h2>
+                        {results.score >= 0 ? 
                         <span className='result-span' style={{color: results.color}}> {results.score}%</span>
+                        : 'No Score Available'}
                     </div>
                     <div className='result' id='time-div'>
                         <h2>Time Taken</h2>
