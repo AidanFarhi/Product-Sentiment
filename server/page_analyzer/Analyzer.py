@@ -68,6 +68,7 @@ class Analyzer:
             'excellent book': 0,
             'great read': 0,
             'excellent read': 0,
+            
         }
         self.total_positive_hits = 0
         # maintain a count of negagive words found in reviews
@@ -106,6 +107,9 @@ class Analyzer:
             'unreliable': 0,
             'rotten': 0,
             'very disappointed': 0,
+            'highly disappointed': 0,
+            'extremely disappointed': 0,
+            'so disappointed': 0,
             'was spoilt': 0,
             'was spoiled': 0,
             'bad smell': 0,
@@ -120,6 +124,7 @@ class Analyzer:
             'am disappointed': 0,
             'mold': 0,
             'inedible': 0,
+            'intend to replace': 0
         }
         self.total_negative_hits = 0
         self.score = 0
