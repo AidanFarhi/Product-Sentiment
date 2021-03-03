@@ -165,3 +165,68 @@ body, #main {
 .result-span {
     font-size: 2.5rem;
 }
+
+/* Mobile Section */
+@media screen and (max-width: 769px) {
+    #main, body, #results {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #nav-bar {
+        display: flex;
+        flex-direction: row;
+        height: 10vh;
+    }
+
+    #logo {
+        margin-left: 1rem;
+    }
+
+    #nav-bar-header {
+        font-size: 1rem;
+        margin-left: 2rem;
+    }
+
+    #about-link {
+        color:rgb(120, 120, 120);
+        font-size: 1rem;
+        position: relative;
+        margin-left: 5rem;
+    }
+
+    #form-header {
+        font-size: 1.2rem;
+    }
+
+    #url-form {
+        width: 90vw;
+        margin-top: 5vh;
+        margin-left: 5vw;
+        margin-right: 5vw;
+        margin-bottom: 5px;
+        padding-bottom: 5px;
+    }
+
+    #url-input {
+        width: 70vw;
+    }
+
+    #submit-button {
+        font-size: 1.2rem;
+        width: 10rem;
+        height: 4rem;
+    }
+
+    .result {
+        margin-bottom: 5px;
+    }
+
+    .result>h2 {
+        font-size: 1.2rem;
+    }
+
+    .result-span {
+        font-size: 2rem;
+    }
+}

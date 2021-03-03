@@ -24,3 +24,15 @@
     color: rgb(46, 46, 46);
     font-size: 1.2rem;
 }
+
+@media screen and (max-width: 769px) {
+    #info {
+        font-size: .2rem;
+        height: fit-content;
+        margin-bottom: 10px;
+    }
+    
+    #info>h4 {
+        font-size: 1.2rem;
+    }
+}
