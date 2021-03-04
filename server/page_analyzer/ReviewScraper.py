@@ -8,7 +8,6 @@ class ReviewScraper:
 
     # Store given url, headers, cleaned reviews, and a count of pages scraped in state
     def __init__(self, url):
-        print(url)
         self.url = url
         self.headers = {
             'authority': 'www.amazon.com',
