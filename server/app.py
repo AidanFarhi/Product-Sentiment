@@ -3,7 +3,7 @@ from server.page_analyzer.ReviewScraper import ReviewScraper
 from flask import Flask, request
 import os
 
-app = Flask(__name__, static_folder='.client/build', static_url_path='/')
+app = Flask(__name__, static_folder='../client/build', static_url_path='/')
 
 @app.errorhandler(404)
 def not_found(e):
@@ -32,4 +32,4 @@ def analyze():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 5000))
