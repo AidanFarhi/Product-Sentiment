@@ -97,20 +97,14 @@ class ReviewScraper:
     # driver/main() function
     def get_reviews(self):
         start = time.time()
-        print('Opening product page...')
         link_to_all_reviews = self.open_product_link(self.url)
-        print('Going to review page...')
         raw_all_reviews_page = self.open_see_all_reviews_link(link_to_all_reviews)
         original_next_review_page_link = self.get_original_next_review_page(raw_all_reviews_page)
-        print('Generating links...')
         next_page_links = self.get_next_pages(original_next_review_page_link)
-        print('Extracting reviews...')
         # Sends out all requests to scrape reviews async, which drastically reduces execution time
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         loop.run_until_complete(self.send_out_async_requests(next_page_links))
         self.time = round(time.time() - start, 2)
         self.reviews_scraped = len(self.reviews)
-        print(f'Reviews extracted: {len(self.reviews)}')
-        print(f'Time taken: {self.time} seconds')
         return self.reviews

@@ -57,7 +57,6 @@ export default function Main() {
                     color: color
                 }
             )
-            console.log(data)
         } catch(er) { console.log(er) }
     }
 

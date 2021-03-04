@@ -9,6 +9,7 @@ class Analyzer:
         self.positive_phrases = {
             'really like': 0,
             'happy with this purchase': 0,
+            'happy with the purchase': 0,
             'happy with purchase': 0,
             'love it': 0,
             'love them': 0,
@@ -68,26 +69,52 @@ class Analyzer:
             'excellent book': 0,
             'great read': 0,
             'excellent read': 0,
-            
+            'beyond my expectations': 0,
+            'exceeded my expectations': 0,
+            'nicer than anticipated': 0,
+            'better than anticipated': 0,
+            'loves it': 0,
+            'nicely made': 0,
+            'amazing device': 0,
+            'amazing product': 0,
+            'amazing purchase': 0,
+            'amazing item': 0,
+            'great device': 0,
+            'great product': 0,
+            'great purchase': 0,
+            'great item': 0,
+            'excellent device': 0,
+            'excellent product': 0,
+            'excellent purchase': 0,
+            'excellent item': 0,
+            'well built': 0,
+            'is in love with this': 0,
+            'is in love with these': 0,
+            'are in love with this': 0,
+            'are in love with these': 0
         }
         self.total_positive_hits = 0
         # maintain a count of negagive words found in reviews
         self.negative_phrases = {
             'try another brand': 0,
-            'returned': 0,
             'wouldn’t buy again': 0,
+            'would not buy again': 0,
             'would not recommend': 0,
             'don’t buy': 0,
             'bad purchase': 0,
             'don\'t waste your time': 0,
             'don\'t waste your money': 0,
             'don\'t be fooled': 0,
-            'dissatisfied': 0,
+            'very dissatisfied': 0,
+            'am dissatisfied': 0,
+            'was dissatisfied': 0,
             'low quality': 0,
             'not satisfied': 0,
             'poorly designed': 0,
             'cheaply built': 0,
             'cheaply made': 0,
+            'badly made': 0,
+            'poorly made': 0,
             'poor quality': 0,
             'not made well': 0,
             'waste of cash': 0,
@@ -98,14 +125,17 @@ class Analyzer:
             'Junk': 0,
             'not happy': 0,
             'not a good choice': 0,
-            'returning': 0,
+            'was a bad choice': 0,
+            'will be returning': 0,
             'will return': 0,
             'annoying': 0,
             'not high quality': 0,
             'not sturdy': 0,
             'not reliable': 0,
-            'unreliable': 0,
-            'rotten': 0,
+            'is unreliable': 0,
+            'was unreliable': 0,
+            'are unreliable': 0,
+            'was rotten': 0,
             'very disappointed': 0,
             'highly disappointed': 0,
             'extremely disappointed': 0,
@@ -122,9 +152,14 @@ class Analyzer:
             'tasted rotten': 0,
             'was disappointed': 0,
             'am disappointed': 0,
-            'mold': 0,
+            'has mold': 0,
+            'had mold': 0,
+            'is moldy': 0,
+            'was moldy': 0,
             'inedible': 0,
-            'intend to replace': 0
+            'intend to replace': 0,
+            'going to return': 0,
+            'plan on returning': 0
         }
         self.total_negative_hits = 0
         self.score = 0
@@ -142,12 +177,6 @@ class Analyzer:
                 if re.search(reg, review) is not None:
                     self.negative_phrases[key] += 1
                     self.total_negative_hits += 1
-    
-    def show_results(self):
-        print(self.positive_phrases)
-        print(self.negative_phrases)
-        print("Positive Hits:", self.total_positive_hits)
-        print("Negative Hits:", self.total_negative_hits)
 
     def calc_score(self):
         total_hits = self.total_positive_hits + self.total_negative_hits
@@ -160,5 +189,4 @@ class Analyzer:
     def analyze_reviews(self):
         self.get_counts(self.reviews)
         self.calc_score()
-        self.show_results()
         return True

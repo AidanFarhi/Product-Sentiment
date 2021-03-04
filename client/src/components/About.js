@@ -19,7 +19,7 @@ export default function About() {
                 <p>
                     The score is based on a quick look at what people are actually saying
                     about the product. The app looks at up to 150 reviews and calculates
-                    a value based on specific key words found. If you are a software developer
+                    a value based on specific key words/phrases found. If you are a software developer
                     (or just curious) you can take a deeper look at what's going on here: &nbsp;
                     <a href='https://github.com/AidanFarhi/Product-Sentiment/blob/master/server/page_analyzer/Analyzer.py' target='blank'>
                         Source Code
