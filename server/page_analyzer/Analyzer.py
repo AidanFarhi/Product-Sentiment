@@ -122,7 +122,8 @@ class Analyzer:
             'won\'t by again': 0,
             'not worth the money': 0,
             'disappointing purchase': 0,
-            'Junk': 0,
+            'piece of junk': 0,
+            'piece of crap': 0,
             'not happy': 0,
             'not a good choice': 0,
             'was a bad choice': 0,
@@ -143,8 +144,6 @@ class Analyzer:
             'was spoilt': 0,
             'was spoiled': 0,
             'bad smell': 0,
-            'molds': 0,
-            'moldy': 0,
             'wasn\'t fresh': 0,
             'tasted horrible': 0,
             'tasted bad': 0,
@@ -159,7 +158,17 @@ class Analyzer:
             'inedible': 0,
             'intend to replace': 0,
             'going to return': 0,
-            'plan on returning': 0
+            'plan on returning': 0,
+            'i wish it can be more durable': 0,
+            'i wish it was more durable': 0,
+            'false advertizing': 0,
+            'was faulty': 0,
+            'is faulty': 0,
+            'not durable': 0,
+            'is flimsy': 0,
+            'was flimsy': 0,
+            'chipped easily': 0,
+            'did not withstand': 0
         }
         self.total_negative_hits = 0
         self.score = 0
