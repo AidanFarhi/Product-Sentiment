@@ -106,4 +106,5 @@ class ReviewScraper:
         loop.run_until_complete(self.send_out_async_requests(next_page_links))
         self.time = round(time.time() - start, 2)
         self.reviews_scraped = len(self.reviews)
+        print(self.reviews[-1])
         return self.reviews
