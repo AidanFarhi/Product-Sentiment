@@ -129,6 +129,8 @@ class Analyzer:
             'was a bad choice': 0,
             'will be returning': 0,
             'will return': 0,
+            'will definetly return': 0,
+            'will definetly be returning': 0,
             'annoying': 0,
             'not high quality': 0,
             'not sturdy': 0,
@@ -168,7 +170,20 @@ class Analyzer:
             'is flimsy': 0,
             'was flimsy': 0,
             'chipped easily': 0,
-            'did not withstand': 0
+            'did not withstand': 0,
+            'strong chemical smell': 0,
+            'strong chemical odor': 0,
+            'strong paint smell': 0,
+            'bad chemical smell': 0,
+            'bad paint smell': 0,
+            'strong paint odor': 0,
+            'bad chemical odor': 0,
+            'bad paint odor': 0,
+            'paint comes off': 0,
+            'paint chips': 0,
+            'paint came off': 0,
+            'paint chipped': 0,
+            'put splinter': 0,
         }
         self.total_negative_hits = 0
         self.score = 0
