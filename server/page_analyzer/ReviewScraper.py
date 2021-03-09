@@ -101,6 +101,7 @@ class ReviewScraper:
     # Sets a new User-Agent in headers
     def set_new_user_agent(self):
         user_agent = random.choice(self.user_agent_list)
+        print(user_agent)
         self.headers['User-Agent'] = user_agent
 
     # This method cleans the raw review data and stores all the cleaned reviews in self.reviews in state
