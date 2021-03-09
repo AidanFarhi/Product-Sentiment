@@ -33,6 +33,7 @@ class ReviewScraper:
         review_link_reg = r'"see-all-reviews-link-foot.*a>'
         href_reg = r'href=".*"'
         page = requests.get(url, headers=self.headers)
+        print(page.text)
         review_link_raw = re.search(review_link_reg, page.text).group()
         see_all_reviews_link = re.search(href_reg, review_link_raw).group()[6:-1]
         return see_all_reviews_link
