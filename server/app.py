@@ -56,7 +56,7 @@ def set_session():
                 GLOBAL_PROXY = proxy
                 break
         except:
-            print('Error')
+            print('Error, proxy not valid')
     
     # Now set the User-Agent for the session
     SESSION_AGENT = choice(USER_AGENTS)
