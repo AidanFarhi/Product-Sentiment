@@ -4,22 +4,15 @@ import aiohttp
 import re
 import time
 import random
+from lxml.html import fromstring
 
 class ReviewScraper:
 
     # Store given url, headers, cleaned reviews, and a count of pages scraped in state
-    def __init__(self, url):
+    def __init__(self, url, GLOBAL_PROXY, SESSION_AGENT):
         self.url = url
-        self.user_agent_list = [
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36',
-            'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
-        ]
+        self.global_proxy = GLOBAL_PROXY
+        self.session_agent = SESSION_AGENT
         self.headers = {
             'authority': 'www.amazon.com',
             'pragma': 'no-cache',
@@ -29,6 +22,7 @@ class ReviewScraper:
             'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'accept-encoding': 'gzip, deflate, br',
             'sec-fetch-site': 'none',
+            'User-Agent': self.session_agent,
             'sec-fetch-mode': 'navigate',
             'sec-fetch-dest': 'document',
             'accept-language': 'en-US,en;q=0.9',
@@ -42,8 +36,7 @@ class ReviewScraper:
     def open_product_link(self, url):
         review_link_reg = r'"see-all-reviews-link-foot.*a>'
         href_reg = r'href=".*"'
-        self.set_new_user_agent()
-        page = requests.get(url, headers=self.headers)
+        page = requests.get(url, headers=self.headers, proxies={"http": self.global_proxy, "https": self.global_proxy})
         review_link_raw = re.search(review_link_reg, page.text).group()
         see_all_reviews_link = re.search(href_reg, review_link_raw).group()[6:-1]
         return see_all_reviews_link
@@ -90,19 +83,13 @@ class ReviewScraper:
 
     # An async function that gathers all the async requests into a list
     async def send_out_async_requests(self, ten_page_links):
-        self.set_new_user_agent()
+        # self.set_new_user_agent()
         async with aiohttp.ClientSession(headers=self.headers) as session:
             tasks = []
             for link in ten_page_links:
                 task = asyncio.ensure_future(self.get_cleaned_review_from_link(session, link))
                 tasks.append(task)
             await asyncio.gather(*tasks, return_exceptions=True)
-    
-    # Sets a new User-Agent in headers
-    def set_new_user_agent(self):
-        user_agent = random.choice(self.user_agent_list)
-        print(user_agent)
-        self.headers['User-Agent'] = user_agent
 
     # This method cleans the raw review data and stores all the cleaned reviews in self.reviews in state
     def clean_raw_review_data(self, raw_reviews):

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactLoading from 'react-loading'
 import Error from '../components/Error'
 import '../styles/Main.css'
@@ -26,6 +26,14 @@ export default function Main() {
         else if (score < 85) color = 'green'
         else color = '#64e764'
         return color
+    }
+
+    const setSession = async() => {
+        try {
+            const res = await fetch('set-session')
+            const data = await res.json()
+            console.log(data)
+        } catch(er) { console.log(er) }
     }
 
     const handleSubmit = async(ev) => {
@@ -59,6 +67,10 @@ export default function Main() {
             )
         } catch(er) { console.log(er) }
     }
+
+    useEffect(()=> {
+        setSession()
+    },[])
 
     return (
         <div id='main'> 
