@@ -1,4 +1,5 @@
 import asyncio
+from aiohttp.helpers import proxies_from_env
 import requests
 import aiohttp
 import re
@@ -84,7 +85,8 @@ class ReviewScraper:
     # An async function that gathers all the async requests into a list
     async def send_out_async_requests(self, ten_page_links):
         # self.set_new_user_agent()
-        async with aiohttp.ClientSession(headers=self.headers) as session:
+        proxy_string = 'http://' + self.global_proxy
+        async with aiohttp.ClientSession(headers=self.headers, proxy=proxy_string) as session:
             tasks = []
             for link in ten_page_links:
                 task = asyncio.ensure_future(self.get_cleaned_review_from_link(session, link))

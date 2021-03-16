@@ -16,6 +16,12 @@ export default function Main() {
             color: null,
         }
     )
+    const [sessionVariables, setSessionVariables] = useState(
+        {
+            proxy: "",
+            userAgent: ""
+        }
+    )
 
     const handleChange = ev => setUrl(ev.target.value)
 
@@ -32,6 +38,10 @@ export default function Main() {
         try {
             const res = await fetch('set-session')
             const data = await res.json()
+            setSessionVariables({
+                proxy: data.Proxy,
+                userAgent: data.UserAgent
+            })
             console.log(data)
         } catch(er) { console.log(er) }
     }
@@ -39,6 +49,7 @@ export default function Main() {
     const handleSubmit = async(ev) => {
         ev.preventDefault()
         try {
+            console.log(sessionVariables)
             setError(false)
             setLoading(true)
             setResults({score: null, time: null, totalReviews: null, color: null})
@@ -46,7 +57,13 @@ export default function Main() {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({url: url})
+                body: JSON.stringify(
+                    {
+                        url: url,
+                        proxy: sessionVariables.proxy,
+                        userAgent: sessionVariables.userAgent
+                    }
+                )
             }
             const res = await fetch('/analyze', requestOptions)
             if (!res.ok) {  // make sure response is ok

@@ -44,29 +44,30 @@ def set_session():
             #Grabbing IP and corresponding PORT
             proxy = ":".join([i.xpath('.//td[1]/text()')[0], i.xpath('.//td[2]/text()')[0]])
             proxies.add(proxy)
-    
+
     print(proxies)
     # Now test them and set one that works
     url = 'https://httpbin.org/ip'
     for proxy in proxies:
         try:
             res = requests.get(url, proxies={'http': proxy, 'https': proxy})
-            print(res)
             if res.ok:
                 GLOBAL_PROXY = proxy
-                break
+                break   
         except:
             print('Error, proxy not valid')
     
     # Now set the User-Agent for the session
     SESSION_AGENT = choice(USER_AGENTS)
-    return {"Proxy": GLOBAL_PROXY, "Session-User-Agent": SESSION_AGENT}
+    return {"Proxy": GLOBAL_PROXY or "", "UserAgent": SESSION_AGENT}
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
     if request.method == 'POST':
         url = request.json['url']
-        review_scraper = ReviewScraper(url, GLOBAL_PROXY, SESSION_AGENT)
+        proxy = request.json['proxy']
+        session_agent = request.json['userAgent']
+        review_scraper = ReviewScraper(url, proxy, session_agent)
         reviews = review_scraper.get_reviews()
         analyzer = Analyzer(reviews)
         analyzer.analyze_reviews()
